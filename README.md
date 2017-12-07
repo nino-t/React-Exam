@@ -1,10 +1,13 @@
-## Thinking In React
-Usecase taken from react documentation.
+## React Exam
+Usecase from E-Learning Application Project, when use a system Online Exams. 
+I recommend to use localstorage for save state of questions & remaining time.
 <br>
 <br>
 ![alt text](https://github.com/nino-t/React-Exam/blob/master/demo/demo.gif)
 <br>
-[React Usecase](https://reactjs.org/docs/thinking-in-react.html)
+for an example of a sourcode that has been using localstorage, is located on the link below.
+<br>
+[React exam with localstorage](https://github.com/nino-t/React-Exams-Component)
 
 ## Something Missing?
 
