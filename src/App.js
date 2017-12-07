@@ -83,7 +83,6 @@ class App extends Component {
   }
 
   handleChangeOption(question_id, key_id){
-    const x = 'A';
     const questions = this.state.collection_of_questions;
     
 		this.setUnchecked(questions, question_id);
@@ -122,6 +121,10 @@ class App extends Component {
 		this.setState((prevState) => ({
 			time: prevState.time - 1
 		}));	
+
+    if (this.state.time <= 0) {
+      this.finishHandler();
+    }
 	}	
 
 	componentDidMount() {
@@ -155,15 +158,28 @@ class App extends Component {
 		this.setState({
 			selected
 		});		
-
-		localStorage.soal = JSON.stringify(selected);
 	}  
+
+  finishHandler(){
+    alert('Thank you for taking the exam.');
+  }
 
   render() {
     const x = 'A';
     const questions = this.state.collection_of_questions;
     const select_question_index = this.state.select_question_index;
     const selected_question = questions[select_question_index];
+    var disable_prev = false;  
+    var disable_next = false;
+
+    if (select_question_index === 0) {
+      disable_prev = true;
+    }   
+
+    if (select_question_index === (questions.length - 1)) {
+      disable_next = true;
+    }
+
 
     return (
       <div className="container" style={{ marginTop: '100px' }}>
@@ -213,7 +229,8 @@ class App extends Component {
               <div className="col-md-4">
                 <button 
                   className="btn btn-warning pull-left"
-                  onClick={() => this.changeQuestion(select_question_index - 1)}>
+                  onClick={() => this.changeQuestion(select_question_index - 1)}
+                  disabled={disable_prev}>
                     Prev
                 </button>
               </div>
@@ -231,10 +248,16 @@ class App extends Component {
               </div>
               <div className="col-md-4">
                 <button 
-                  className="btn btn-success pull-right"
+                  className={"btn btn-success pull-right " + (disable_next ? 'hidden' : '')}
                   onClick={() => this.changeQuestion(select_question_index + 1)}>
                   Next
                 </button>
+
+                <button 
+                  className={"btn btn-success pull-right " + (disable_next ? '' : 'hidden')}
+                  onClick={() => this.finishHandler()}>
+                  Finish
+                </button>                
               </div>              
             </div>
           </div>
